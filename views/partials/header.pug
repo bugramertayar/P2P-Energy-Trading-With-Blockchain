@@ -1,8 +1,8 @@
 .navbar.navbar-light.fixed-top.navbar-expand-lg.bg-light
   .container
     a.navbar-brand(href='/')
-      i.fas.fa-cube
-      | Project name
+      i.fas.fa-solar-panel
+      | Safe Energy
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='.navbar-collapse')
       span.sr-only Toggle navigation
       span.navbar-toggler-icon
@@ -11,9 +11,9 @@
         li.nav-item(class=(title === 'Home') ? 'active' : undefined)
           a.nav-link(href='/') Home
         li.nav-item(class=(title === 'API Examples') ? 'active' : undefined)
-          a.nav-link(href='/api') API Examples
+          a.nav-link(href='/api') Approval
         li.nav-item(class=(title === 'Contact') ? 'active' : undefined)
-          a.nav-link(href='/contact') Contact
+          a.nav-link(href='/contact') Make Transaction
       ul.nav.navbar-nav.ml-auto
         if !user
           li.nav-item(class=(title === 'Login') ? 'active' : undefined)

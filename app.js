@@ -18,6 +18,10 @@ const passport = require('passport');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 
+var cron = require('node-cron');
+const fs = require('fs');
+const http = require('http');
+
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
 /**
@@ -32,6 +36,8 @@ const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
+const transactionsController = require('./controllers/transactions');
+
 
 /**
  * API keys and Passport configuration.
@@ -121,9 +127,37 @@ app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/bootstrap/d
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/jquery/dist'), { maxAge: 31557600000 }));
 app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free/webfonts'), { maxAge: 31557600000 }));
 
+cron.schedule('*/1 * * * * *', function(){
+  const file = fs.createWriteStream(`controllers/raspberry/raspberry.json`);
+  const request = http.get(`http://20.98.105.229/raspberry/raspberry.json`, function(response) {
+    response.pipe(file);
+    fs.readFile("controllers/raspberry/raspberry.json", (err, data) => {
+      if (err) throw err;
+      var MongoClient = require('mongodb').MongoClient;
+      var url = "mongodb://localhost:27017/test";
+      MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("test");
+        var myquery = { 'profile.name': JSON.parse(data).userName };
+        var newvalues = { $set: { 'profile.wallet': JSON.parse(data).quantity } };
+        dbo.collection("users").updateOne(myquery, newvalues, function (err, res) {
+          if (err) throw err;
+          //console.log("1 document updated");
+          db.close();
+        });
+      });
+    });
+});
+});
+
+
 /**
  * Primary app routes.
  */
+// DENEME
+app.get('/api', transactionsController.getTransactions);
+app.post('/api', transactionsController.sendTransactionRequestApproved);
+//DENEME
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);

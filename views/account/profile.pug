@@ -19,7 +19,7 @@ block content
             | Unverified: &nbsp;
             a(href='/account/verify') Send verification email
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Name
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Username
       .col-md-7
         input.form-control(type='text', name='name', id='name', value=user.profile.name, autocomplete='name')
     .form-group.row
@@ -37,9 +37,9 @@ block content
           input(type='radio', class='form-check-input' checked=user.profile.gender == 'other', name='gender', value='other', data-toggle='radio')
           label.form-check-label Other
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='location') Location
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='wallet') Wallet
       .col-md-7
-        input.form-control(type='text', name='location', id='location', value=user.profile.location, autocomplete)
+        input.form-control(type='text', disabled name='wallet', id='wallet', value=user.profile.wallet, autocomplete)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='website') Website
       .col-md-7

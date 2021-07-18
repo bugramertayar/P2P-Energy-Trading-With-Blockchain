@@ -37,7 +37,7 @@ block content
     img(src=venueDetail.venue.photos.groups[0].items[0].prefix + '150x150' + venueDetail.venue.photos.groups[0].items[0].suffix)
 
   .badge.badge-primary #{venueDetail.venue.name} (#{venueDetail.venue.categories[0].shortName})
-  .badge.badge-success #{venueDetail.venue.location.address}, #{venueDetail.venue.location.city}, #{venueDetail.venue.location.state}
+  .badge.badge-success #{venueDetail.venue.wallet.address}, #{venueDetail.venue.wallet.city}, #{venueDetail.venue.wallet.state}
   .badge.badge-warning #{venueDetail.venue.likes.count} likes, #{venueDetail.venue.rating} rating
 
   h3.text-primary User Checkins
@@ -45,13 +45,13 @@ block content
     thead
       tr
         th Name
-        th Location
+        th wallet
         th Category
         th Checkins
     tbody
       for checkin in userCheckins.checkins.items
         tr
           td= checkin.venue.name
-          td #{checkin.venue.location.address}, #{checkin.venue.location.city}, #{checkin.venue.location.state}
+          td #{checkin.venue.wallet.address}, #{checkin.venue.wallet.city}, #{checkin.venue.wallet.state}
           td= checkin.venue.categories[0].shortName
           td= checkin.venue.stats.checkinsCount

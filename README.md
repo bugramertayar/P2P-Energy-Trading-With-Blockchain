@@ -525,7 +525,7 @@ Recommended Node.js Libraries
 -----------------------------
 
 - [Nodemon](https://github.com/remy/nodemon) - Automatically restart Node.js server on code changes.
-- [geoip-lite](https://github.com/bluesmoon/node-geoip) - Geolocation coordinates from IP address.
+- [geoip-lite](https://github.com/bluesmoon/node-geoip) - Geowallet coordinates from IP address.
 - [Filesize.js](http://filesizejs.com/) - Pretty file sizes, e.g. `filesize(265318); // "265.32 kB"`.
 - [Numeral.js](http://numeraljs.com) - Library for formatting and manipulating numbers.
 - [Node Inspector](https://github.com/node-inspector/node-inspector) - Node.js debugger based on Chrome Developer Tools.
@@ -987,7 +987,7 @@ your main template file, add this to `head` block.
 ```pug
 script(src='/socket.io/socket.io.js')
 script.
-    let socket = io.connect(window.location.href);
+    let socket = io.connect(window.wallet.href);
     socket.on('greet', function (data) {
       console.log(data);
       socket.emit('respond', { message: 'Hey there, server!' });
@@ -1005,7 +1005,7 @@ script code into `main.js`, inside the `$(document).ready()` function:
 $(document).ready(function() {
 
   // Place JavaScript code here...
-  let socket = io.connect(window.location.href);
+  let socket = io.connect(window.wallet.href);
   socket.on('greet', function (data) {
     console.log(data);
     socket.emit('respond', { message: 'Hey there, server!' });

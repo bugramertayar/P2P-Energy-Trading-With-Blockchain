@@ -168,7 +168,7 @@ passport.use(new FacebookStrategy({
           user.profile.name = `${profile.name.givenName} ${profile.name.familyName}`;
           user.profile.gender = profile._json.gender;
           user.profile.picture = `https://graph.facebook.com/${profile.id}/picture?type=large`;
-          user.profile.location = (profile._json.location) ? profile._json.location.name : '';
+          user.profile.wallet = (profile._json.wallet) ? profile._json.wallet.name : '';
           user.save((err) => {
             done(err, user);
           });
@@ -200,7 +200,7 @@ passport.use(new GitHubStrategy({
           user.tokens.push({ kind: 'github', accessToken });
           user.profile.name = user.profile.name || profile.displayName;
           user.profile.picture = user.profile.picture || profile._json.avatar_url;
-          user.profile.location = user.profile.location || profile._json.location;
+          user.profile.wallet = user.profile.wallet || profile._json.wallet;
           user.profile.website = user.profile.website || profile._json.blog;
           user.save((err) => {
             req.flash('info', { msg: 'GitHub account has been linked.' });
@@ -227,7 +227,7 @@ passport.use(new GitHubStrategy({
           user.tokens.push({ kind: 'github', accessToken });
           user.profile.name = profile.displayName;
           user.profile.picture = profile._json.avatar_url;
-          user.profile.location = profile._json.location;
+          user.profile.wallet = profile._json.wallet;
           user.profile.website = profile._json.blog;
           user.save((err) => {
             done(err, user);
@@ -259,7 +259,7 @@ passport.use(new TwitterStrategy({
           user.twitter = profile.id;
           user.tokens.push({ kind: 'twitter', accessToken, tokenSecret });
           user.profile.name = user.profile.name || profile.displayName;
-          user.profile.location = user.profile.location || profile._json.location;
+          user.profile.wallet = user.profile.wallet || profile._json.wallet;
           user.profile.picture = user.profile.picture || profile._json.profile_image_url_https;
           user.save((err) => {
             if (err) { return done(err); }
@@ -283,7 +283,7 @@ passport.use(new TwitterStrategy({
       user.twitter = profile.id;
       user.tokens.push({ kind: 'twitter', accessToken, tokenSecret });
       user.profile.name = profile.displayName;
-      user.profile.location = profile._json.location;
+      user.profile.wallet = profile._json.wallet;
       user.profile.picture = profile._json.profile_image_url_https;
       user.save((err) => {
         done(err, user);
